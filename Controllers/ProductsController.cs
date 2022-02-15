@@ -68,6 +68,8 @@ namespace DevReviews.API.Controllers
             //Se tiver erros de validação, retornar BadRequest()
             var product = new Product(model.Title, model.Description, model.Price);
             _dbContext.Products.Add(product);
+            _dbContext.SaveChanges();
+
             return CreatedAtAction(nameof(GetById), new { id = product.Id }, model);
         }
         
@@ -88,6 +90,7 @@ namespace DevReviews.API.Controllers
             }
 
             product.Update(model.Description, model.Price);
+            _dbContext.SaveChanges();
 
             return NoContent();
         }
