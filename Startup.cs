@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,12 +28,8 @@ namespace DevReviews.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            var connectionString = Configuration.GetValue<string>("DevReviewsCn");
             //Transient, Scopet, Singleton
-            //services.AddSingleton<DevReviewsDbContext>();
-
-            services.AddDbContext<DevReviewsDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddSingleton<DevReviewsDbContext>();
 
             services.AddAutoMapper(typeof(ProductProfile));
 
