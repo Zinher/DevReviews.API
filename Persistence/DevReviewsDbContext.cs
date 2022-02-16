@@ -37,9 +37,5 @@ namespace DevReviews.API.Persistence
                     // .HasColumnName("txt_Author");
             });
         }
-        
-        
-        
-        
     }
 }
