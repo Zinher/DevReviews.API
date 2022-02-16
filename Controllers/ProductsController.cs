@@ -7,6 +7,7 @@ using DevReviews.API.Entities;
 using DevReviews.API.Models;
 using DevReviews.API.Persistence;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DevReviews.API.Controllers
 {
@@ -37,7 +38,11 @@ namespace DevReviews.API.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id){
             //Se não achar retornar NotFound
-            var product = _dbContext.Products.SingleOrDefault(p => p.Id == id);
+            var product = _dbContext
+                .Products
+                .Include(p => p.Reviews)
+                .SingleOrDefault(p => p.Id == id);
+            
             if(product == null){
                 return NotFound();
             }

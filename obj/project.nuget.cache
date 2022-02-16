@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "W1EhflsOnrwjedD1lA+61fKSUNHBDOIAWdJBDvypbtnawBswexLfy7pdvP2GfVlRqjokYpfscDwtGX8Bhk2tUQ==",
+  "dgSpecHash": "wG1JBPRJGAZRXQzAoq3UBN8sEXMjCJnLBrT/zZ3lrljKXexuBN+90ZO34SFtlrGMrsgA3v11kB16HPhMhxOVvg==",
   "success": true,
-  "projectFilePath": "c:\\Users\\aless\\Documents\\projetos\\jornadadotnet\\DevReviews.API\\DevReviews.API.csproj",
+  "projectFilePath": "C:\\Users\\aless\\Documents\\projetos\\jornadadotnet\\DevReviews.API\\DevReviews.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\aless\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\aless\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",

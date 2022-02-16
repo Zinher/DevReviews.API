@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\aless\\Documents\\projetos\\jornadadotnet\\DevReviews.API\\DevReviews.API.csproj": {}
+    "C:\\Users\\aless\\Documents\\projetos\\jornadadotnet\\DevReviews.API\\DevReviews.API.csproj": {}
   },
   "projects": {
-    "c:\\Users\\aless\\Documents\\projetos\\jornadadotnet\\DevReviews.API\\DevReviews.API.csproj": {
+    "C:\\Users\\aless\\Documents\\projetos\\jornadadotnet\\DevReviews.API\\DevReviews.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\aless\\Documents\\projetos\\jornadadotnet\\DevReviews.API\\DevReviews.API.csproj",
+        "projectUniqueName": "C:\\Users\\aless\\Documents\\projetos\\jornadadotnet\\DevReviews.API\\DevReviews.API.csproj",
         "projectName": "DevReviews.API",
-        "projectPath": "c:\\Users\\aless\\Documents\\projetos\\jornadadotnet\\DevReviews.API\\DevReviews.API.csproj",
+        "projectPath": "C:\\Users\\aless\\Documents\\projetos\\jornadadotnet\\DevReviews.API\\DevReviews.API.csproj",
         "packagesPath": "C:\\Users\\aless\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\aless\\Documents\\projetos\\jornadadotnet\\DevReviews.API\\obj\\",
+        "outputPath": "C:\\Users\\aless\\Documents\\projetos\\jornadadotnet\\DevReviews.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\aless\\AppData\\Roaming\\NuGet\\NuGet.Config",
