@@ -36,12 +36,12 @@ namespace DevReviews.API.Controllers
 
         //GET para api/products/{id}
         [HttpGet("{id}")]
-        public IActionResult GetById(int id){
+        public async Task<IActionResult> GetById(int id){
             //Se não achar retornar NotFound
-            var product = _dbContext
+            var product = await _dbContext
                 .Products
                 .Include(p => p.Reviews)
-                .SingleOrDefault(p => p.Id == id);
+                .SingleOrDefaultAsync(p => p.Id == id);
             
             if(product == null){
                 return NotFound();
@@ -69,18 +69,18 @@ namespace DevReviews.API.Controllers
 
         //POST para api/products
         [HttpPost]
-        public IActionResult Post(AddModelInputModel model) {
+        public async Task<IActionResult> Post(AddModelInputModel model) {
             //Se tiver erros de validação, retornar BadRequest()
             var product = new Product(model.Title, model.Description, model.Price);
-            _dbContext.Products.Add(product);
-            _dbContext.SaveChanges();
+            await _dbContext.Products.AddAsync(product);
+            await _dbContext.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetById), new { id = product.Id }, model);
         }
         
         //PUT para api/products/{id}
         [HttpPut("{id}")]
-        public IActionResult PUT(int id, UpdateProductInputModel model) {
+        public async Task<IActionResult> PUT(int id, UpdateProductInputModel model) {
             //Se tiver erros de validação, retornar BadRequest()
             //Se não existir produto com o id especificado, retornar NotFound()
             
@@ -88,14 +88,14 @@ namespace DevReviews.API.Controllers
                 return BadRequest();
             }
 
-            var product = _dbContext.Products.SingleOrDefault(p => p.Id == id);
+            var product = await _dbContext.Products.SingleOrDefaultAsync(p => p.Id == id);
 
             if(product == null){
                 return NotFound();
             }
 
             product.Update(model.Description, model.Price);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
             return NoContent();
         }
