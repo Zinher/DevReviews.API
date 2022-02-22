@@ -1,13 +1,10 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using DevReviews.API.Entities;
 using DevReviews.API.Models;
-using DevReviews.API.Persistence;
+using DevReviews.API.Persistence.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace DevReviews.API.Controllers
 {
@@ -15,17 +12,17 @@ namespace DevReviews.API.Controllers
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
-        private readonly DevReviewsDbContext _dbContext;
+        private readonly IProductRepository _repository;
         private readonly IMapper _mapper;
 
-        public ProductsController(DevReviewsDbContext dbContext, IMapper mapper)
+        public ProductsController(IProductRepository repository, IMapper mapper)
         {
-            _dbContext = dbContext;
+            _repository = repository;
             _mapper = mapper;
         }
         [HttpGet]
-        public IActionResult GetAll() {
-            var products = _dbContext.Products;
+        public async Task<IActionResult> GetAll() {
+            var products = await _repository.GetAllAsync();
 
             // var productsViewModel = products
                 // .Select(p => new ProductViewModel(p.Id, p.Title, p.Price));
@@ -38,10 +35,7 @@ namespace DevReviews.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id){
             //Se não achar retornar NotFound
-            var product = await _dbContext
-                .Products
-                .Include(p => p.Reviews)
-                .SingleOrDefaultAsync(p => p.Id == id);
+            var product = await _repository.GetDetailsByIdAsync(id);
             
             if(product == null){
                 return NotFound();
@@ -72,8 +66,8 @@ namespace DevReviews.API.Controllers
         public async Task<IActionResult> Post(AddModelInputModel model) {
             //Se tiver erros de validação, retornar BadRequest()
             var product = new Product(model.Title, model.Description, model.Price);
-            await _dbContext.Products.AddAsync(product);
-            await _dbContext.SaveChangesAsync();
+            
+            await _repository.AddAsync(product);
 
             return CreatedAtAction(nameof(GetById), new { id = product.Id }, model);
         }
@@ -88,14 +82,14 @@ namespace DevReviews.API.Controllers
                 return BadRequest();
             }
 
-            var product = await _dbContext.Products.SingleOrDefaultAsync(p => p.Id == id);
+            var product = await _repository.GetByIdAsync(id);
 
             if(product == null){
                 return NotFound();
             }
 
             product.Update(model.Description, model.Price);
-            await _dbContext.SaveChangesAsync();
+            await _repository.UpdateAsync(product);
 
             return NoContent();
         }
