@@ -6,6 +6,7 @@ using DevReviews.API.Models;
 using DevReviews.API.Persistence.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace DevReviews.API.Controllers
 {
@@ -81,6 +82,8 @@ namespace DevReviews.API.Controllers
         public async Task<IActionResult> Post(AddModelInputModel model) {
             //Se tiver erros de validação, retornar BadRequest()
             var product = new Product(model.Title, model.Description, model.Price);
+
+            Log.Information("O método post foi invocado.");
             
             await _repository.AddAsync(product);
 
